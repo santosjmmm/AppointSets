@@ -1,0 +1,8 @@
+[build]
+builder = "nixpacks"
+
+[phases.setup]
+pkgs = ["php"]
+
+[start]
+cmd = "php -S 0.0.0.0:$PORT"
