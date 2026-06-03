@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logoImg from "../assets/logo.jpg";
+import API_BASE_URL from "../config";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,8 +30,8 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      // ✅ CHANGED: Swapped localhost out for your live Railway domain endpoint
-      const res = await fetch("https://appointsets-production.up.railway.app/api/login.php", {
+      // ✅ UPDATED: Replaced the static URL string with the dynamic global configuration variable template string
+      const res = await fetch(`${API_BASE_URL}/api/login.php`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
