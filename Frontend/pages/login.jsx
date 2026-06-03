@@ -29,7 +29,8 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch("http://localhost/appointsets/Backend/api/login.php", {
+      // ✅ CHANGED: Swapped localhost out for your live Railway domain endpoint
+      const res = await fetch("https://appointsets-production.up.railway.app/api/login.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -45,7 +46,7 @@ const Login = () => {
         localStorage.setItem("userName", data.name);
         localStorage.setItem("userRole", data.role);
         if (data.user_type) {
-          localStorage.setItem("userType", data.user_type); // Differentiates staff vs dentist inside dashboard
+          localStorage.setItem("userType", data.user_type); 
         }
 
         // Role-based Redirection
@@ -68,7 +69,6 @@ const Login = () => {
         }
       } else {
         setError(data.message);
-        // Extract seconds if the backend sends a lockout message
         if (data.message.includes("Too many attempts")) {
           const seconds = parseInt(data.message.match(/\d+/)?.[0]);
           if (seconds) setRemainingTime(seconds);
@@ -152,7 +152,7 @@ const Login = () => {
         </form>
 
         <div className="mt-8 text-gray-500 text-sm">
-          Don't have an account?{" "}
+          {"Don't have an account? "}
           <Link to="/signup" className="text-blue-500 font-bold hover:underline">
             Sign Up
           </Link>
